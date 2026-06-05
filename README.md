@@ -2,16 +2,12 @@
 
 # A Deep Dive Into the Bus System
 
----
-
 ## Overview
 
 Modern computer systems contain multiple components that need access to a common communication channel called the **system bus**. The CPU, memory controller, DMA controller, storage devices, and peripherals may all attempt to use the bus simultaneously. Without a mechanism to control access, data collisions and system instability would occur.
 
 This project is an **interactive virtual exhibit** that explains and simulates how **bus arbitration** works, the mechanism that decides which device gets control of the bus when multiple devices request access at the same time.
 
-
----
 
 ## The Simulator
 
@@ -31,7 +27,6 @@ The centerpiece of this exhibit is an **interactive bus arbitration simulator** 
   - **Red** — device is denied and queued
 - A **transaction log** records every cycle's events (e.g., `Cycle 6: Arbiter granted bus to CPU (fixed priority)`)
 
----
 
 ## Getting Started
 
