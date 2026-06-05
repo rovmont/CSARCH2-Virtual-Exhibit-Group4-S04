@@ -1,8 +1,6 @@
 # CSARCH2-Virtual-Exhibit-Group4-S04
 
 # A Deep Dive Into the Bus System
-> An interactive virtual exhibit
-
 
 ---
 
