@@ -1,19 +1,8 @@
 # CSARCH2-Virtual-Exhibit-Group4-S04
 
 # A Deep Dive Into the Bus System
-> A CSARCH2 interactive virtual exhibit by **Group 4**
+> An interactive virtual exhibit
 
----
-
-## Team Members
-
-| Name |
-|------|
-| Go, Justin |
-| Leung, Jillianne |
-| Luna, Jacoba |
-| Montaño, Rovin |
-| Teoxon, Jat |
 
 ---
 
@@ -26,7 +15,7 @@ This project is an **interactive virtual exhibit** that explains and simulates h
 
 ---
 
-## 🖥️ The Simulator
+## The Simulator
 
 The centerpiece of this exhibit is an **interactive bus arbitration simulator** with three devices:
 
