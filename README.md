@@ -20,9 +20,26 @@ A computer bus is a shared communication pathway. Only one device can transmit d
 
 ## SECTION 1: Purpose of a bus arbiter
 
-A computer bus is a communication channel carrying data, addresses, and control signals between different components. The bus is shared between two devices, and only one device can drive it at a time. If two devices tried to transmit simultaneously, their signals corrupt each other, creating what is known as a 'bus conflict.'
+A computer bus is a communication channel carrying data, addresses, and control signals between different components. The bus is shared between multiple devices, and only one device can drive it at a time. If two devices try to transmit simultaneously, their signals corrupt each other, creating what is known as a 'bus conflict.'
 
-A bus arbiter is a hardware unit that works towards preventing these bus conflicts from happening. Devices signal to the bus arbiter that it would like to use the bus by sending a Bus Request (BR) line, and the arbiter responds with a Bus Grant (BG) line to one bus at a time. The device that receives the BG will then assert Bus Busy (BBSY) to signal that the bus is in use. When the device is finished transferring data, it lifts the BBSY. This method not only ensures that bus conflicts won't occur, but also that the bus is used in an orderly manner and that all BG lines are responded to.
+A bus arbiter is a hardware unit that works towards preventing these bus conflicts from happening. Devices signal to the bus arbiter that they would like to use the bus by sending a Bus Request (BR) line, and the arbiter responds with a Bus Grant (BG) line to one device at a time. The device that receives the BG will then assert Bus Busy (BBSY) to signal that the bus is in use. When the device is finished transferring data, it lifts the BBSY. This method not only ensures that bus conflicts won't occur, but also that the bus is used in an orderly manner and that all BG lines are responded to.
+
+Prior to examining specific hardware implementations or the interactive simulator, it is essential to establish that mediating this shared access involves deeper systemic challenges. The arbitration process is governed by three fundamental design considerations:
+
+**1.1 The Fairness vs. Urgency Trade-off**
+
+System architects must balance equitable access among all devices against the prioritization of critical operations. For example, a CPU executing a power-cycle interrupt requires more immediate access than a storage drive performing a background data transfer. While fairness prevents low-priority devices from experiencing indefinite delays (starvation), prioritizing urgency guarantees that the system remains responsive to time-sensitive operations. Arbitration algorithms are primarily categorized by how they balance these two opposing requirements.
+
+**1.2 Centralized vs. Distributed Decision-Making**
+
+Arbitration logic is implemented either through a single dedicated hardware unit (centralized) or dispersed across multiple devices on the bus (distributed). Centralized architectures offer simplified control logic but introduce a single point of failure. Conversely, distributed architectures provide greater fault tolerance but necessitate highly complex coordination protocols to function effectively.
+
+**1.3 The Hidden Cost: Arbitration Overhead**
+
+The arbitration process inherently consumes system clock cycles. Devices must assert request lines, the arbiter must evaluate competing priorities, and grant signals must propagate back to the requesting components. During this evaluation phase, the bus remains idle. This delay is known as arbitration latency. Selecting an inefficient arbitration mode for a specific system workload can consume excessive bus bandwidth, ultimately degrading overall system performance.
+
+Evaluating these three considerations—fairness versus urgency, centralized versus distributed logic, and latency overhead—provides a framework for analyzing bus arbitration systems. The subsequent sections and the interactive simulator will demonstrate how different arbitration modes prioritize specific parameters at the expense of others.
+
 
 ---
 
@@ -124,3 +141,6 @@ Our team has chosen the following components and frameworks for our tech stack w
 
 7. **Text Layout Engine: Pretext.js**
    - We chose Pretext.js for layouting and positioning dynamic, real-time explanations and educational overlays while the simulation is running. As the simulator runs, we will display contextual explanations detailing exactly why a device is granted or denied access based on the current arbitration mode. Because these explanation blocks will constantly shift in size and length, Pretext.js calculates their text heights and line breaks using pure arithmetic instead of querying the DOM.
+
+![Style Guide Snapshot](%5BGROUP%204%5D%20Snapshot%20Style%20Guide.png)
+
